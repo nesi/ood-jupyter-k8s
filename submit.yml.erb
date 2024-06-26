@@ -18,7 +18,7 @@ script:
   native:
     container:
       name: "ml101"
-      image: "hub.docker.com/kandnesi/ood-jupyter-k8s:latest"
+      image: "kandnesi/ood-jupyter-k8s:v0.1"
       command: ["/bin/bash","-l","<%= staged_root %>/job_script_content.sh"]
       working_dir: "<%= Etc.getpwnam(ENV['USER']).dir %>"
       restart_policy: 'OnFailure'
