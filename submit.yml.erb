@@ -9,6 +9,7 @@
    user = OodSupport::User.new
 
    services_node = Resolv.getaddress("servicesnode")
+   nfs_node = Resolv.getaddress("external-nfs")
 %>
 ---
 script:
@@ -37,6 +38,11 @@ script:
         host: <%= services_node %>
         path: /srv/homes
         destination_path: /home/shared
+      - type: nfs
+        name: software
+        host: <%= nfs_node %>
+        path: /mnt/data-migration
+        destination_path: /opt/nesi
       - type: host
         name: nslcd-socket
         host_type: Socket
