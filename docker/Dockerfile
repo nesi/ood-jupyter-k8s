@@ -24,16 +24,3 @@ RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y \
 RUN wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh -O /miniconda.sh \
     && bash /miniconda.sh -b -p /opt/miniconda3 \
     && rm -f /miniconda.sh
-
-# copy the repo source (e.g. notebooks) to the container image
-ARG ML101_HASH="55c6ad0a64c9e6a552425cbd872f77da8cc1b87b"
-RUN git clone https://github.com/nesi/sklearn_tutorial.git /opt/sklearn_tutorial \
-    && cd /opt/sklearn_tutorial \
-    && git checkout $ML101_HASH \
-    && rm -rf /opt/sklearn_tutorial/.git \
-    && . /opt/miniconda3/etc/profile.d/conda.sh \
-    && conda config --set auto_activate_base false \
-    && conda env create -f /opt/sklearn_tutorial/environment.yml -p /var/lib/skl_tut \
-    && echo ". /opt/miniconda3/etc/profile.d/conda.sh" > /etc/profile.d/conda.sh \
-    && echo "conda activate /var/lib/skl_tut" >> /etc/profile.d/conda.sh \
-    && conda clean -afy
