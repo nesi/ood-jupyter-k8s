@@ -13,6 +13,9 @@ RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y \
         nodejs \
         nscd \
         nslcd \
+        python-is-python3 \
+        python3 \
+        python3-pip \
         rsync \
         unzip \
         vim \
@@ -20,7 +23,5 @@ RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y \
         zip \
     && rm -rf /var/lib/apt/lists/*
 
-# install miniconda
-RUN wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh -O /miniconda.sh \
-    && bash /miniconda.sh -b -p /opt/miniconda3 \
-    && rm -f /miniconda.sh
+# install jupyterlab
+RUN pip3 --no-cache-dir install jupyterlab
