@@ -18,7 +18,7 @@ script:
   native:
     container:
       name: "ml101"
-      image: "kandnesi/ood-jupyter-k8s:v0.1"
+      image: "kandnesi/ood-jupyter-k8s:v0.2"
       command: ["/bin/bash","-l","<%= staged_root %>/job_script_content.sh"]
       working_dir: "<%= Etc.getpwnam(ENV['USER']).dir %>"
       restart_policy: 'OnFailure'
@@ -29,6 +29,7 @@ script:
         HOME: "<%= user.home %>"
         LOG_DIR: "<%= staged_root %>"
         SHELL: "/bin/bash"
+        LMOD_SITE_MODULEPATH: "/opt/nesi/CS400_centos7_bdw/modules/all"
       port: "8080"
       cpu: "<%= cpu %>"
       memory: "<%= memory %>Gi"
