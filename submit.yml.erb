@@ -8,8 +8,8 @@
 
    user = OodSupport::User.new
 
-   services_node = Resolv.getaddress("servicesnode")
-   nfs_node = Resolv.getaddress("external-nfs")
+   ood_nfs_server = Resolv.getaddress("ood-dev-nfs-node")
+   software_nfs_server = Resolv.getaddress("external-nfs")
 %>
 ---
 script:
@@ -36,12 +36,12 @@ script:
     mounts:
       - type: nfs
         name: home
-        host: <%= services_node %>
+        host: <%= ood_nfs_server %>
         path: /srv/homes
         destination_path: /home/shared
       - type: nfs
         name: software
-        host: <%= nfs_node %>
+        host: <%= software_nfs_server %>
         path: /mnt/data-migration
         destination_path: /opt/nesi
       - type: host
